@@ -29,14 +29,32 @@ const setSchools = asyncHandler(async(req, res) => {
 // @route PUT /api/schools
 // @ access Private
 const updateSchools = asyncHandler(async(req, res) => {
-    res.status(200).json({ message: `Update schools ${req.params.id}` })
+    const school = await School.findById(req.params.id)
+
+    if (!school){
+        res.status(400)
+        throw new Error('School not found')
+    }
+
+    const updatedSchool = await School.findByIdAndUpdate(req.params.id, req.
+        body, {
+            new: true,
+        })
+    res.status(200).json(updatedSchool)
 })
 
 // @desc Delete schools
 // @route DELETE /api/schools
 // @ access Private
 const deleteSchools = asyncHandler(async(req, res) => {
-    res.status(200).json({ message: `Delete schools ${req.params.id}` })
+    const school = await School.findById(req.params.id)
+
+    if (!school){
+        res.status(400)
+        throw new Error('School not found')
+    }
+    await school.remove()
+    res.status(200).json( {id: req.params.id})
 })
 module.exports = {
     getSchools,
