@@ -1,5 +1,8 @@
 import {useState, useEffect} from 'react'
 import {FaPaypal, FaSchool, FaSignInAlt} from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
 function CreateSchool() {
     const [formData, setFormData] = useState({
         name: '',
@@ -7,7 +10,14 @@ function CreateSchool() {
         password:'',
         pasword2:'',
     })
-
+    const navigate = useNavigate()
+    const { user } = useSelector((state) => state.auth)
+    useEffect(() => {
+      if (!user) {
+        navigate('/login')
+      }
+    }, [user, navigate])
+    
     const {name, email, password, password2 } = formData
     const onChange = (e) => {
         setFormData((previousState) => ({
