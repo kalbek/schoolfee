@@ -10,7 +10,7 @@ function RegisterStudent() {
         password:'',
         pasword2:'',
     })
-      const navigate = useNavigate()
+    const navigate = useNavigate()
 
     const { user } = useSelector((state) => state.auth)
     useEffect(() => {
