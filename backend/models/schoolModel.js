@@ -10,6 +10,7 @@ const schoolSchema = mongoose.Schema(
     text: {
       type: String,
       required: [true, 'Please add a text value'],
+      typeKey: '$type' ,
     },
   },
   {

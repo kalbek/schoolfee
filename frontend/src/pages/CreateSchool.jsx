@@ -1,56 +1,44 @@
-import {useState, useEffect} from 'react'
-import {FaPaypal, FaSchool, FaSignInAlt} from 'react-icons/fa'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import SchoolForm from '../components/SchoolForm'
+import CreateSchoolForm from '../components/CreateSchoolForm'
+import SchoolItem from '../components/SchoolItem'
+import Spinner from '../components/Spinner'
+import { getSchools,reset } from '../features/schools/schoolSlice'
 
 function CreateSchool() {
-    const [formData, setFormData] = useState({
-        name: '',
-        emai:'',
-        password:'',
-        pasword2:'',
-    })
-    const navigate = useNavigate()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-    const { user } = useSelector((state) => state.auth)
-    useEffect(() => {
-      if (!user) {
-        navigate('/login')
-      }
-    }, [user, navigate])
-    const {name, email, password, password2 } = formData
-    const onChange = (e) => {
-        setFormData((previousState) => ({
-            ...previousState,
-            [e.target.name] : e.target.value,
-        }))
+  const { user } = useSelector((state) => state.auth)
+  const {schools, isLoading, isError, message} = useSelector((state) => state.schools)
+  useEffect(() => {
+    if (isError){
+      console.log(message)
     }
-    const onSubmit = (e) => {
-        e.preventDefault()
+    if (!user) {
+      navigate('/login')
     }
-  return (
-    <>
-    <section className='heading'>
-            <h1>
-                <FaSchool/> Add Schools
-                <FaPaypal/>
-            </h1>
-            {/* <p>Please Login</p> */}
-        </section>
-        <section className='form'>
-            <form onSubmit={onSubmit}>
-                <div className="form-group">
-                    <input className="form-control" id="name" name='name' type='name' value={name} placeholder='Enter school name' onChange={onChange} />
-                </div>
-                <div className="form-group">
-                    <input className="form-control" id="email" name='email' type='email' value={email} placeholder='Enter your email' onChange={onChange} />
-                </div>
-                <div className="form-group">
-                    <input className="form-control" id="password" name='password' type='password' value={password} placeholder='Enter your password' onChange={onChange} />
-                </div>
-                <button className="btn btn-block form-group">Add</button>
-            </form>
-        </section>
+
+    dispatch(getSchools())
+
+    return () => {
+      dispatch(reset())
+    }
+  }, [user, navigate, isError, message, dispatch])
+
+    if (isLoading){
+      return <Spinner/>
+    }
+    return (
+      <> 
+      <section>
+        
+      </section>
+      <CreateSchoolForm/>
+
+      
     </>
   )
 }
