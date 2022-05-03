@@ -1,45 +1,100 @@
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import SchoolForm from '../components/SchoolForm'
-import CreateSchoolForm from '../components/CreateSchoolForm'
-import SchoolItem from '../components/SchoolItem'
+import {useState, useEffect} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
+import {toast} from 'react-toastify'
+import {FaUser} from 'react-icons/fa'
+import { reset} from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
-import { getSchools,reset } from '../features/schools/schoolSlice'
+import {getSchools, createSchool} from '../features/schools/schoolSlice'
+import SecondSchoolItem from '../components/SecondSchoolItem'
+import CreateSchoolFrom from '../components/CreateSchoolForm'
+
 
 function CreateSchool() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+    const [formData, setFormData] = useState({
+        name: '',
+        text: '',
+        address:'',
+    })
 
-  const { user } = useSelector((state) => state.auth)
-  const {schools, isLoading, isError, message} = useSelector((state) => state.schools)
-  useEffect(() => {
-    if (isError){
-      console.log(message)
+    const {name, text, address } = formData
+    
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const { user } = useSelector((state) => state.auth)
+    const {schools, isLoading, isError, message} = useSelector((state) => state.schools)
+    useEffect(() => {
+      if (isError){
+        console.log(message)
+      }
+      if (!user) {
+        navigate('/login')
+      }
+  
+      dispatch(getSchools())
+  
+      return () => {
+        dispatch(reset())
+      }
+    }, [user, navigate, isError, message, dispatch])
+ 
+
+    const onChange = (e) => {
+        setFormData((previousState) => ({
+            ...previousState,
+            [e.target.name] : e.target.value,
+        }))
     }
-    if (!user) {
-      navigate('/login')
+    const onSubmit = (e) => {
+        e.preventDefault()
+       
+           const userData = {
+            name,
+            text,
+            address,
+           }
+        dispatch(createSchool(userData))
+        setFormData('')
     }
-
-    dispatch(getSchools())
-
-    return () => {
-      dispatch(reset())
-    }
-  }, [user, navigate, isError, message, dispatch])
-
     if (isLoading){
-      return <Spinner/>
+        return <Spinner/>
     }
     return (
-      <> 
-      <section>
-        
-      </section>
-      <CreateSchoolForm/>
-
+    <>
+        <section className='heading'>
+            <h1>
+                <FaUser/> Add School
+            </h1>
+            {/* <p>Please Create an Account</p> */}
+            {/* <CreateSchoolFrom/> */}
+        </section>
+        <section className='form'>
+            <form onSubmit={onSubmit}>
+                <div className="form-group">
+                    <input className="form-control" id="name" type='text' name='name' value={name} placeholder='Enter school  name' onChange={onChange} />
+                </div>
+                <div className="form-group">
+                    <input className="form-control" id="text" type='text' name='text' value={text} placeholder='Enter some text' onChange={onChange} />
+                </div>
+                <div className="form-group">
+                    <input className="form-control" id="address" type='text' name='address' value={address} placeholder='Enter your email' onChange={onChange} />
+                </div>
+                <button className="btn btn-block form-group">Add School</button>
+            </form>
+        </section>
       
-    </>
+        
+        <section className="content">
+        {schools.length > 0 ? (
+          <div className="schools">
+            {schools.map((school) => (
+                <SecondSchoolItem key={school._id} school={school}/>
+            ))}
+          </div>
+        ) : (<h3>No schools found</h3>)}
+      </section> 
+      </>
   )
 }
 

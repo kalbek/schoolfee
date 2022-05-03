@@ -7,9 +7,17 @@ const schoolSchema = mongoose.Schema(
       required: true,
       ref: 'User',
     },
+    name: {
+        type: String,
+        // required: [true, 'Please add a name value'],
+    },
     text: {
       type: String,
-      required: [true, 'Please add a text value'],
+      // required: [true, 'Please add a text value'],
+    },
+    address: {
+        type: String,
+        // required: [true, 'Please add a address value'],
     },
   },
   {
