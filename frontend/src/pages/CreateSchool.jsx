@@ -7,7 +7,6 @@ import { reset} from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
 import {getSchools, createSchool} from '../features/schools/schoolSlice'
 import SecondSchoolItem from '../components/SecondSchoolItem'
-import CreateSchoolFrom from '../components/CreateSchoolForm'
 
 
 function CreateSchool() {
@@ -48,7 +47,6 @@ function CreateSchool() {
     }
     const onSubmit = (e) => {
         e.preventDefault()
-       
            const userData = {
             name,
             level,
@@ -75,15 +73,14 @@ function CreateSchool() {
                     <input className="form-control" id="name" type='text' name='name' value={name} placeholder='Enter school  name' onChange={onChange} />
                 </div>
                 <div className="form-group">
-                    <input className="form-control" id="level" type='text' name='level' value={level} placeholder='Enter some level' onChange={onChange} />
+                    <input className="form-control" id="address" type='text' name='address' value={address} placeholder='Enter school address' onChange={onChange} />
                 </div>
                 <div className="form-group">
-                    <input className="form-control" id="address" type='text' name='address' value={address} placeholder='Enter your email' onChange={onChange} />
+                    <input className="form-control" id="level" type='text' name='level' value={level} placeholder='Enter school level' onChange={onChange} />
                 </div>
                 <button className="btn btn-block form-group">Add School</button>
             </form>
         </section>
-      
         
         <section className="content">
         {schools.length > 0 ? (
