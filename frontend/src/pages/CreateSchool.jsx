@@ -13,11 +13,11 @@ import CreateSchoolFrom from '../components/CreateSchoolForm'
 function CreateSchool() {
     const [formData, setFormData] = useState({
         name: '',
-        text: '',
+        level: '',
         address:'',
     })
 
-    const {name, text, address } = formData
+    const {name, level, address } = formData
     
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -51,7 +51,7 @@ function CreateSchool() {
        
            const userData = {
             name,
-            text,
+            level,
             address,
            }
         dispatch(createSchool(userData))
@@ -75,7 +75,7 @@ function CreateSchool() {
                     <input className="form-control" id="name" type='text' name='name' value={name} placeholder='Enter school  name' onChange={onChange} />
                 </div>
                 <div className="form-group">
-                    <input className="form-control" id="text" type='text' name='text' value={text} placeholder='Enter some text' onChange={onChange} />
+                    <input className="form-control" id="level" type='text' name='level' value={level} placeholder='Enter some level' onChange={onChange} />
                 </div>
                 <div className="form-group">
                     <input className="form-control" id="address" type='text' name='address' value={address} placeholder='Enter your email' onChange={onChange} />

@@ -10,7 +10,7 @@ import Spinner from '../components/Spinner'
 function Register() {
     const [formData, setFormData] = useState({
         name: '',
-        emai:'',
+        email:'',
         password:'',
         pasword2:'',
     })

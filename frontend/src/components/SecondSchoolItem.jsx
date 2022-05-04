@@ -7,12 +7,12 @@ function SecondSchoolItem({school}) {
         <div>
             {new Date(school.createdAt).toLocaleDateString('en-US')}
         </div>
-        <h2>text: {school.text}</h2>
-        <h2>name: {school.name}</h2>
-        <h2>address: {school.address}</h2>
+        <h2>School Name: {school.name}</h2>
+        <h2>School Address: {school.address}</h2>
+        <h2>School Level: {school.level}</h2>
         <button onClick={() => dispatch(deleteSchool(school._id))} className="close">X</button>
     </div>
   )
 }
- 
+
 export default SecondSchoolItem

@@ -11,8 +11,7 @@ const getSchools = asyncHandler(async (req, res) => {
     const schools = await School.find({user: req.user.id})
     res.status(200).json(schools)     
 })
-// @Consider this added
-// @End of Consider this added
+
 // @desc Set schools
 // @route SET /api/schools
 // @ access Private
@@ -22,10 +21,10 @@ const setSchools = asyncHandler(async(req, res) => {
     //     throw new Error('Please add a text field')
     // }
     const school = await School.create({
-        name: req.body.name,
-        text: req.body.text,
-        address: req.body.address,
         user: req.user.id,
+        name: req.body.name,
+        address: req.body.address,
+        level: req.body.level,
     })
     res.status(200).json(school)
 })
