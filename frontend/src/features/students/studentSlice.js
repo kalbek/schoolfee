@@ -12,7 +12,7 @@ export const createStudent = createAsyncThunk('students/create', async (studentD
     try {
         const token = thunkAPI.getState().auth.user.token
         // remove the token for no auth student creation
-        return await studentService.createStudnet(studentData, token)
+        return await studentService.createStudent(studentData, token)
     } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message)
         || error.message || error.toString()
