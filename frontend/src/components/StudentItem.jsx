@@ -7,9 +7,12 @@ function StudentItem({student}) {
         <div>
             {new Date(student.createdAt).toLocaleDateString('en-US')}
         </div>
-        <h2>Student Name: {student.name}</h2>
-        <h2>Student Address: {student.address}</h2>
-        <h2>Student Level: {student.level}</h2>
+        <h2>First Name: {student.fname}</h2>
+        <h2>Last Name: {student.lname}</h2>
+        <h2>Sex: {student.sex}</h2>
+        <h2>Grade: {student.grade}</h2>
+        <h2>Section: {student.section}</h2>
+        <h2>Scholarship: {student.hasScholarship}</h2>
         <button onClick={() => dispatch(deleteStudent(student._id))} className="close">X</button>
     </div>
   )

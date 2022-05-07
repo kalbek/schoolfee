@@ -10,12 +10,15 @@ import StudentItem from '../components/StudentItem'
 
 function CreateStudent() {
     const [formData, setFormData] = useState({
-        name: '',   
-        level: '',
-        address:'',
+        fname: '',   
+        lname: '',   
+        sex: '',   
+        grade: '',   
+        section: '',
+        hasScholarship:'',
     })
 
-    const {name, level, address } = formData
+    const {fname, lname, sex, grade, section, hasScholarship } = formData
     
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -47,12 +50,19 @@ function CreateStudent() {
     const onSubmit = (e) => {
         e.preventDefault()
            const userData = {
-            name,
-            level,
-            address,
+            fname,
+            lname,
+            sex,
+            grade,
+            section,
+            hasScholarship,
            }
         dispatch(createStudent(userData))
         setFormData('')
+    }
+    const handleCheckbox = (e) => {
+        e.target.value = true;
+
     }
     if (isLoading){
         return <Spinner/>
@@ -69,18 +79,32 @@ function CreateStudent() {
         <section className='form'>
             <form onSubmit={onSubmit}>
                 <div className="form-group">
-                    <input className="form-control" id="name" type='text' name='name' value={name} placeholder='Enter student  name' onChange={onChange} />
+                    <input className="form-control" id="fname" type='text' name='fname' value={fname} placeholder='Student First Name' onChange={onChange} />
                 </div>
                 <div className="form-group">
-                    <input className="form-control" id="address" type='text' name='address' value={address} placeholder='Enter student address' onChange={onChange} />
+                    <input className="form-control" id="lname" type='text' name='lname' value={lname} placeholder='Student Last Name' onChange={onChange} />
                 </div>
                 <div className="form-group">
-                    <input className="form-control" id="level" type='text' name='level' value={level} placeholder='Enter student level' onChange={onChange} />
+                    <select name="sex" id="sex" placeholder='sex'>
+                        <option value="sex">M</option>
+                        <option value="sex">F</option>
+                    </select>
+                </div>
+                <div className="form-group">
+                    <input className="form-control" id="grade" type='text' name='grade' value={grade} placeholder='Student  grade' onChange={onChange} />
+                </div>
+                <div className="form-group">
+                    <input className="form-control" id="section" type='text' name='section' value={section} placeholder='Student section' onChange={onChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="hasScholarship">Student has scholarship</label>
+                    {/* <input className="form-control" id="hasScholarship" type='radio' name='hasScholarship' value={hasScholarship} placeholder='Student has scholarship.' onChange={onChange} /> */}
+                    <input type="checkbox" id="hasScholarship" name="hasScholarship" value="false" onChange={this.handleCheckbox}></input>
+                    <label for="hasScholarship">Has Scholarship</label>
                 </div>
                 <button className="btn btn-block form-group">Add Student</button>
             </form>
         </section>
-        
         <section className="content">
         {students.length > 0 ? (
           <div className="students">
@@ -89,8 +113,8 @@ function CreateStudent() {
             ))}
           </div>
         ) : (<h3>No students found</h3>)}
-      </section> 
-      </>
+        </section> 
+        </>
   )
 }
 

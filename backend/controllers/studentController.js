@@ -22,9 +22,12 @@ const setStudents = asyncHandler(async(req, res) => {
     // }
     const student = await Student.create({
         user: req.user.id,
-        name: req.body.name,
-        address: req.body.address,
-        level: req.body.level,
+        fname: req.body.fname,
+        lname: req.body.lname,
+        sex: req.body.sex,
+        grade: req.body.grade,
+        section: req.body.section,
+        hasScholarship: req.body.hasScholarship,
     })
     res.status(200).json(student)
 })

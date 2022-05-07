@@ -7,17 +7,29 @@ const studentSchema = mongoose.Schema(
       required: true,
       ref: 'User',
     },
-    name: {
+    fname: {
         type: String,
         // required: [true, 'Please add a name value'],
     },
-    address: {
+    lname: {
+        type: String,
+        // required: [true, 'Please add a name value'],
+    },
+    sex: {
       type: String,
       // required: [true, 'Please add a address value'],
     },
-    level: {
-      type: String,
-      // required: [true, 'Please add a text value'],
+    grade: {
+    type: String,
+    // required: [true, 'Please add a text value'],
+    },
+    section: {
+    type: String,
+    // required: [true, 'Please add a text value'],
+    },
+    hasScholarship: {
+    type: Boolean,
+    // required: [true, 'Please add a text value'],
     },
   },
   {
