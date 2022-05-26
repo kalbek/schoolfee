@@ -5,7 +5,7 @@ import {toast} from 'react-toastify'
 import {FaUser} from 'react-icons/fa'
 import { reset} from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
-import {getSchools, createSchool} from '../features/schools/schoolSlice'
+import {getSchools, createSchool} from '../features/schools/secondSchoolSlice'
 import SecondSchoolItem from '../components/SecondSchoolItem'
 
 

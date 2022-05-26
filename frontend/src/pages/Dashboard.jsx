@@ -36,9 +36,9 @@ function Dashboard() {
         <h4 className='user-name'>Welcome {user && user.name.charAt(0).toUpperCase()+ user.name.slice(1)}</h4>
         <h1>Dashboard</h1>
       </section>
-      <SchoolForm/>
+      {/* <SchoolForm/> */}
 
-      <section className="content">
+      {/* <section className="content">
         {schools.length > 0 ? (
           <div className="schools">
             {schools.map((school) => (
@@ -46,7 +46,8 @@ function Dashboard() {
             ))}
           </div>
         ) : (<h3>No schools found</h3>)}
-      </section>
+      </section> */}
+      
     </>
   )
 }

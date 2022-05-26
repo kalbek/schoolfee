@@ -1,18 +1,18 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
-import schoolService from './schoolService'
+import studentService from './studentService'
 const initialState = {
-    schools: [],
+    students: [],
     isError: false,
     isSuccess: false,
     isLoading: false,
     message: ''
 }
 //Create new School
-export const createSchool = createAsyncThunk('schools/create', async (schoolData, thunkAPI) => {
+export const createStudent = createAsyncThunk('students/create', async (studentData, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
         // remove the token for no auth school creation
-        return await schoolService.createSchool(schoolData, token)
+        return await studentService.createStudent(studentData, token)
     } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message)
         || error.message || error.toString()
@@ -21,11 +21,11 @@ export const createSchool = createAsyncThunk('schools/create', async (schoolData
 })
 
 // Get Schools
-export const getSchools = createAsyncThunk('schools/getAll', async (_, thunkAPI) => {
+export const getStudents = createAsyncThunk('students/getAll', async (_, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
         // remove the token for no auth school creation
-        return await schoolService.getSchools(token)
+        return await studentService.getStudents(token)
     } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message)
         || error.message || error.toString()
@@ -34,64 +34,64 @@ export const getSchools = createAsyncThunk('schools/getAll', async (_, thunkAPI)
 })
 
 //Delete user School
-export const deleteSchool = createAsyncThunk('schools/delete', async (id, thunkAPI) => {
+export const deleteStudent = createAsyncThunk('students/delete', async (id, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
         // remove the token for no auth school creation
-        return await schoolService.deleteSchool(id, token)
+        return await studentService.deleteStudent(id, token)
     } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message)
         || error.message || error.toString()
         return thunkAPI.rejectWithValue(message)
     }
 })
-export const schoolSlice = createSlice({
-    name: 'school',
+export const studentSlice = createSlice({
+    name: 'student',
     initialState,
     reducers: {
         reset: (state) => initialState
     }, 
     extraReducers: (builder) => {
         builder
-        .addCase(createSchool.pending, (state) => {
+        .addCase(createStudent.pending, (state) => {
             state.isLoading = true
         })
-        .addCase(createSchool.fulfilled, (state, action) => {
+        .addCase(createStudent.fulfilled, (state, action) => {
             state.isLoading = false
             state.isSuccess = true
-            state.schools.push(action.payload)
+            state.students.push(action.payload)
         })
-        .addCase(createSchool.rejected, (state, action) => {
+        .addCase(createStudent.rejected, (state, action) => {
             state.isLoading = false
             state.isError = true
             state.message = action.payload
         })
 
-        // to get schools
-        .addCase(getSchools.pending, (state) => {
+        // to get students
+        .addCase(getStudents.pending, (state) => {
             state.isLoading = true
         })
-        .addCase(getSchools.fulfilled, (state, action) => {
+        .addCase(getStudents.fulfilled, (state, action) => {
             state.isLoading = false
             state.isSuccess = true
-            state.schools = action.payload
+            state.students = action.payload
         })
-        .addCase(getSchools.rejected, (state, action) => {
+        .addCase(getStudents.rejected, (state, action) => {
             state.isLoading = false
             state.isError = true
-            state.message = action.payload
+            state.message= action.payload
         })
 
-        // to delete schools
-        .addCase(deleteSchool.pending, (state) => {
+        // to delete students
+        .addCase(deleteStudent.pending, (state) => {
             state.isLoading = true
         })
-        .addCase(deleteSchool.fulfilled, (state, action) => {
+        .addCase(deleteStudent.fulfilled, (state, action) => {
             state.isLoading = false
             state.isSuccess = true
-            state.schools = state.schools.filter((school) => school._id !== action.payload.id)
+            state.students = state.students.filter((student) => student._id !== action.payload.id)
         })
-        .addCase(deleteSchool.rejected, (state, action) => {
+        .addCase(deleteStudent.rejected, (state, action) => {
             state.isLoading = false
             state.isError = true
             state.message = action.payload
@@ -99,5 +99,5 @@ export const schoolSlice = createSlice({
     },
 })
 
-export const {reset} = schoolSlice.actions
-export default schoolSlice.reducer
+export const {reset} = studentSlice.actions
+export default studentSlice.reducer

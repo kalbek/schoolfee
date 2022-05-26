@@ -1,5 +1,6 @@
 import { useDispatch} from 'react-redux'
 import { deleteSchool} from '../features/schools/secondSchoolSlice'
+// import { deleteSchool} from '../features/students/choolSlice'
 function SecondSchoolItem({school}) {
     const dispatch = useDispatch()
   return (

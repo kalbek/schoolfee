@@ -2,7 +2,6 @@ const asyncHandler = require('express-async-handler')
 const School = require('../models/schoolModel')
 const User = require('../models/userModel')
 
-
 // @desc Get schools
 // @route GET /api/schools
 // @ access Private
@@ -16,10 +15,10 @@ const getSchools = asyncHandler(async (req, res) => {
 // @route SET /api/schools
 // @ access Private
 const setSchools = asyncHandler(async(req, res) => {
-    if(!req.body.text){
-        res.status(400)
-        throw new Error('Please add a text field')
-    }
+    // if(!req.body.text){
+    //     res.status(400)
+    //     throw new Error('Please add a text field')
+    // }
     const school = await School.create({
         text: req.body.text,
         user: req.user.id,

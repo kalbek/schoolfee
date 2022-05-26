@@ -13,6 +13,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.use('/api/schools', require('./routes/secondSchoolRoutes'))
+app.use('/api/students', require('./routes/studentRoutes'))
 app.use('/api/users', require('./routes/userRoutes'))
 
 // Serve frontend
