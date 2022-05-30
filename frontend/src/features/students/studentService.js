@@ -6,15 +6,16 @@
 import axios from 'axios'
 
 const API_URL = '/api/students/'
+const API_URL2 = '/api/students/register/'
 
 // Create Student
-const createStudent = async (studentData, token) => {
+const createStudent = async (schoolId, studentData, token) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
         } 
     }    
-    const response = await axios.post(API_URL, studentData, config)
+    const response = await axios.post(API_URL2 + schoolId, studentData, config)
 
     return response.data
 }
@@ -41,6 +42,7 @@ const deleteStudent = async (studentId, token) => {
 
     return response.data
 }
+
 const StudentService = {
     createStudent,
     getStudents,

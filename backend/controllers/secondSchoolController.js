@@ -6,6 +6,15 @@ const User = require('../models/userModel')
 // @desc Get schools
 // @route GET /api/schools
 // @ access Private
+const getSchool = asyncHandler(async (req, res) => {
+    // find school only by logged in user
+    const school = await School.findById(req.params.id)
+    res.status(200).json(school)     
+})
+
+// @desc Get schools
+// @route GET /api/schools
+// @ access Private
 const getSchools = asyncHandler(async (req, res) => {
     // find school only by logged in user
     const schools = await School.find({user: req.user.id})
@@ -90,4 +99,5 @@ module.exports = {
     setSchools,
     updateSchools,
     deleteSchools,
+    getSchool,
 }
