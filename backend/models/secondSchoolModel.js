@@ -19,6 +19,15 @@ const schoolSchema = mongoose.Schema(
       type: String,
       // required: [true, 'Please add a text value'],
     },
+    // students: {
+    //   type: [String],
+    //   // required: [true, 'Please add a text value'],
+    // },
+    students: {
+      type: [Object],
+      // required: true,
+      // ref: 'User',
+    },
   },
   {
     timestamps: true,

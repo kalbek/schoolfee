@@ -16,14 +16,21 @@ function RegisterStudent() {
         grade: '',
         section: '',
     })
-
+    
+    let [school, setSchool] = useState("")
+    let handleSchoolSelection = (e) => {
+      setSchool(e.target.value)
+      console.log("id: "+ e.target.value)
+    }
     const { fname, grade, lname, section } = formData
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
     
     const { user } = useSelector((state) => state.auth)
+    // const { school } = useSelector((state) => state.getSchools)
     const { students, isLoading, isError, message} = useSelector((state) => state.students)
+    const {schools} = useSelector((state) => state.schools)
 
     useEffect(() => {
       if (isError){
@@ -34,11 +41,12 @@ function RegisterStudent() {
       }
       
       dispatch(getStudents())
+      // dispatch(getSchools())
       
       return () => {
         dispatch(reset())
       }
-    }, [user, navigate, isError, message, dispatch])
+    }, [schools, user, navigate, isError, message, dispatch])
 
     const onChange = (e) => {
         setFormData((previousState) => ({
@@ -54,8 +62,8 @@ function RegisterStudent() {
             grade,
             section,
         }
-        dispatch(createStudent(studentData))
-        setFormData('')
+        dispatch(createStudent("6290dbacc492e2a86c2c785f",studentData))
+        // setFormData('')
     }
     if (isLoading){
         return <Spinner/>
@@ -63,13 +71,32 @@ function RegisterStudent() {
   return (
     <>
     <section className='heading'>
+
             <h1>
                 <FaChild/> Register Student
             </h1>
-            {/* <p>Please Login</p> */}
+          
         </section>
+        <section className="content">
+          
+        {schools.length > 0 ? (
+          <div className="schools">
+                      
+          </div>
+        ) : (<h3>No schools found</h3>)}
+        
+      </section> 
+      <section className="selection">
+        
+      </section>
         <section className='form'>
             <form onSubmit={onSubmit}>
+                <div className="form-group">
+                <select onChange={handleSchoolSelection}> 
+                <option value="Select a School"> Select a School </option>
+                  {schools.map((school) => <option key={school._id} value={school._id}>{school.name}</option>)}
+                </select>
+                </div>
                 <div className="form-group">
                     <input className="form-control" id="fname" name='fname' type='text' value={fname} placeholder='Student first name' onChange={onChange} />
                 </div>

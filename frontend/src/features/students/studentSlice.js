@@ -8,14 +8,16 @@ const initialState = {
     message: ''
 }
 //Create new School
-export const createStudent = createAsyncThunk('students/create', async (studentData, thunkAPI) => {
+export const createStudent = createAsyncThunk('students/create', async (id,studentData, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
+        console.log("token: "+ token)
         // remove the token for no auth school creation
-        return await studentService.createStudent(studentData, token)
+        return await studentService.createStudent(id, studentData, token)
     } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message)
         || error.message || error.toString()
+        console.log(message)
         return thunkAPI.rejectWithValue(message)
     }
 })
@@ -45,6 +47,7 @@ export const deleteStudent = createAsyncThunk('students/delete', async (id, thun
         return thunkAPI.rejectWithValue(message)
     }
 })
+
 export const studentSlice = createSlice({
     name: 'student',
     initialState,

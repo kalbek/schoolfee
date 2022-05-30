@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import {toast} from 'react-toastify'
-import {FaUser} from 'react-icons/fa'
+import {FaSchool, FaUser} from 'react-icons/fa'
 import { reset} from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
 import {getSchools, createSchool} from '../features/schools/secondSchoolSlice'
@@ -62,7 +62,7 @@ function CreateSchool() {
     <>
         <section className='heading'>
             <h1>
-                <FaUser/> Add School
+                <FaSchool/> Add School
             </h1>
             {/* <p>Please Create an Account</p> */}
             {/* <CreateSchoolFrom/> */}
