@@ -6,19 +6,18 @@
 import axios from 'axios'
 
 const API_URL = '/api/students/'
-const API_URL2 = '/api/students/register/'
+// const API_URL2 = '/api/students/register/'
 
 // Create Student
-const createStudent = async (schoolId, studentData, token) => {
-    console.log("hit the createStudent service")
+const createStudent = async ( studentData, token) => {
+    console.log(`hit the createStudent service`)
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
         } 
     }    
-    const response = await axios.post(API_URL2 + schoolId, studentData, config)
-    
-    console.log("now reached here @ createStudent service")
+    const response = await axios.post(API_URL, studentData, config)
+    console.log(`now reached here @ createStudent service`)
     return response.data
 }
 

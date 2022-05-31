@@ -9,14 +9,16 @@ const initialState = {
 }
 
 //Create new School
-export const createStudent = createAsyncThunk('students/register', async (id, studentData, thunkAPI) => {
+export const createStudent = createAsyncThunk('students/register', async (studentData, thunkAPI) => {
     try {
         console.log(`type of thunkAPI ${typeof thunkAPI}` ) 
         console.log("the token: ")
         const token = thunkAPI.getState().auth.user.token
         console.log("hit the createStudent slice")
         // remove the token for no auth school creation
-        return await studentService.createStudent(id, studentData, token)
+        console.log(`student data: ${studentData}`)
+        console.log(`sep`)
+        return await studentService.createStudent(studentData, token)
         
     } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message)

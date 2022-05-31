@@ -4,9 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import { FaChild} from 'react-icons/fa'
 import { reset} from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
-// import { getSchools } from '../features/schools/secondSchoolSlice'
-import { getStudents, createStudent } from '../features/students/studentSlice'
 import StudentItem from '../components/StudentItem'
+import { getStudents, createStudent } from '../features/students/studentSlice'
 
 import { getSchools } from '../features/schools/schoolSlice'
 
@@ -76,7 +75,7 @@ function RegisterStudent() {
 
         console.log(`just school: ${school } type is: ${typeof school}`)
         const id = school
-        dispatch(createStudent(id, studentData))
+        dispatch(createStudent(studentData))
         setFormData('')
 
     }

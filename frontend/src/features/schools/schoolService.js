@@ -4,7 +4,6 @@
 
 // axios for making HTTP request
 import axios from 'axios'
-
 const API_URL = '/api/schools/'
 
 // Create School

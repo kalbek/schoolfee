@@ -9,7 +9,7 @@ function Dashboard() {
   const dispatch = useDispatch()
 
   const { user } = useSelector((state) => state.auth)
-  const {schools, isLoading, isError, message} = useSelector((state) => state.schools)
+  const { isLoading, isError, message} = useSelector((state) => state.schools)
   useEffect(() => {
     if (isError){
       console.log(message)

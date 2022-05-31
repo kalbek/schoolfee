@@ -1,11 +1,13 @@
 import { useDispatch} from 'react-redux'
 import { deleteStudent} from '../features/students/studentSlice'
+ 
 function StudentItem({student}) {
     const dispatch = useDispatch()
   return (
     <div className="student">
         <div>
             {new Date(student.createdAt).toLocaleDateString('en-US') + `type is: ${typeof student}` }
+            
         </div>
         <h2>First Name: {student.fname}</h2>
         <h2>Last Name: {student.lname}</h2>

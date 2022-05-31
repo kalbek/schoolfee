@@ -6,12 +6,12 @@ const User = require('../models/userModel')
 // @desc Get students
 // @route GET /api/students
 // @ access Private
+
 const getStudents = asyncHandler(async (req, res) => {
     // find school only by logged in user
     const students = await Student.find({user: req.user.id})
     res.status(200).json(students)     
 })
-
 
 // GET A STUDENT
 const getStudent = asyncHandler(async (req, res) => {
@@ -28,19 +28,8 @@ const setStudents = asyncHandler(async(req, res) => {
     //     res.status(400)
     //     throw new Error('Please add a text field')
     // }
-      // added
-      // const schoolId = req.params.id;
-      // const newStudent = new Student(req.body)
-      // END OF added
-      // added
-      const school = await School.findById(req.params.id)
-    //   console.log("school id: "+ school._id)
-
-    //   const school = await School.findById(req.params.id)
-    //   console.log("school id: "+ school._id)
-
-    //   console.log("schoolId: " + school)
-      // END OF added
+ 
+    ////const school = await School.findById(req.params.id)
     const student = await Student.create({
         user: req.user.id,
         fname: req.body.fname,
@@ -48,10 +37,10 @@ const setStudents = asyncHandler(async(req, res) => {
         grade: req.body.grade,
         section: req.body.section,
     })
-    console.log("type of student : " + typeof student)
+    console.log(`type of student :   ${typeof student}`)
     // await School.findByIdAndUpdate(school._id, {$push: { students: student._id} })
     // optional 
-    await School.findByIdAndUpdate(school._id, {$push: { students: student} })
+    ////await School.findByIdAndUpdate(school._id, {$push: { students: student} })
     res.status(200).json(student)   
 })
 
@@ -62,8 +51,7 @@ const setStudents = asyncHandler(async(req, res) => {
 const updateStudents = asyncHandler(async(req, res) => {
     const studenta = await Student.findById(req.params.id)
     console.log("school id: "+ studenta._id)
-
-
+    
     const student = await Student.findById(req.params.id)
     // console.log("student id: "+ student._id)
     if (!student){
