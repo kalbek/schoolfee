@@ -7,5 +7,5 @@ export const store = configureStore({
     auth: authReducer,
     schools: schoolReducer,
     students: studentReducer,
-  },
+  },  
 });

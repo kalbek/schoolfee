@@ -1,13 +1,11 @@
 import {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
-import {toast} from 'react-toastify'
 import {FaUser} from 'react-icons/fa'
 import { reset} from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
-import {getSchools, createSchool} from '../features/schools/secondSchoolSlice'
-import SecondSchoolItem from '../components/SecondSchoolItem'
-
+import SchoolItem from '../components/SchoolItem'
+import {getSchools, createSchool} from '../features/schools/schoolSlice'
 
 function CreateSchool() {
     const [formData, setFormData] = useState({
@@ -64,8 +62,6 @@ function CreateSchool() {
             <h1>
                 <FaUser/> Add School
             </h1>
-            {/* <p>Please Create an Account</p> */}
-            {/* <CreateSchoolFrom/> */}
         </section>
         <section className='form'>
             <form onSubmit={onSubmit}>
@@ -86,7 +82,7 @@ function CreateSchool() {
         {schools.length > 0 ? (
           <div className="schools">
             {schools.map((school) => (
-                <SecondSchoolItem key={school._id} school={school}/>
+                <SchoolItem key={school._id} school={school}/>
             ))}
           </div>
         ) : (<h3>No schools found</h3>)}

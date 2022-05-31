@@ -1,5 +1,5 @@
 import { useDispatch} from 'react-redux'
-import { deleteStudent} from '../features/students/Slice'
+import { deleteStudent} from '../features/students/studentSlice'
 function StudentItem({student}) {
     const dispatch = useDispatch()
   return (

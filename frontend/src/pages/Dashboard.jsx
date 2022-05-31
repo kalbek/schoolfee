@@ -1,10 +1,8 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import SchoolForm from '../components/SchoolForm'
-import SchoolItem from '../components/SchoolItem'
 import Spinner from '../components/Spinner'
-import { getSchools,reset } from '../features/schools/schoolSlice'
+import { reset } from '../features/schools/schoolSlice'
 
 function Dashboard() {
   const navigate = useNavigate()

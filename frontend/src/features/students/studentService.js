@@ -10,13 +10,15 @@ const API_URL2 = '/api/students/register/'
 
 // Create Student
 const createStudent = async (schoolId, studentData, token) => {
+    console.log("hit the createStudent service")
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
         } 
     }    
     const response = await axios.post(API_URL2 + schoolId, studentData, config)
-
+    
+    console.log("now reached here @ createStudent service")
     return response.data
 }
 
@@ -28,9 +30,9 @@ const getStudents = async (token) => {
         } 
     }    
     const response = await axios.get(API_URL, config)
-
     return response.data
 }
+
 // Delete Users Student
 const deleteStudent = async (studentId, token) => {
     const config = {
