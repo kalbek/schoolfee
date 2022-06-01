@@ -31,7 +31,7 @@ function Dashboard() {
     return (
       <> 
       <section>
-        {/* <h4 className='user-name'>Welcome {user && user.name.charAt(0).toUpperCase()+ user.name.slice(1)}</h4> */}
+        <h4 className='user-name'>Welcome {user && user.name.charAt(0).toUpperCase()+ user.name.slice(1)}</h4>
         <h1>Dashboard</h1>
       </section>
       {/* <SchoolForm/> */}

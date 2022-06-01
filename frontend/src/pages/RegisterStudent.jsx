@@ -21,15 +21,12 @@ function RegisterStudent() {
     let [schoolId, setSchoolId] = useState("")
     
     let handleSchoolSelection = (e) => {
-
       setSchool(e.target.value)
       setSchoolId(e.target.value)
-      console.log("id: " + e.target.value)
-      console.log("school id: " + schoolId)
     }
      
     
-    const { fname, grade, lname, section } = formData
+    const {Id, fname, grade, lname, section } = formData
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -66,15 +63,15 @@ function RegisterStudent() {
     
     const onSubmit = (e) => {
         e.preventDefault()
+        const Id = school
         const studentData = {
+            Id,
             fname,
             lname,
             grade,
             section,
         } 
 
-        console.log(`just school: ${school } type is: ${typeof school}`)
-        const id = school
         dispatch(createStudent(studentData))
         setFormData('')
 

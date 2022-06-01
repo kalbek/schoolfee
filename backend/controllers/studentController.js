@@ -28,19 +28,16 @@ const setStudents = asyncHandler(async(req, res) => {
     //     res.status(400)
     //     throw new Error('Please add a text field')
     // }
- 
-    ////const school = await School.findById(req.params.id)
     const student = await Student.create({
         user: req.user.id,
+        schoolId: req.body.Id,
         fname: req.body.fname,
         lname: req.body.lname,
         grade: req.body.grade,
         section: req.body.section,
     })
-    console.log(`type of student :   ${typeof student}`)
-    // await School.findByIdAndUpdate(school._id, {$push: { students: student._id} })
-    // optional 
-    ////await School.findByIdAndUpdate(school._id, {$push: { students: student} })
+    const school = await School.findById(student.schoolId)
+    await School.findByIdAndUpdate(school._id, {$push: { students: student} })
     res.status(200).json(student)   
 })
 
@@ -50,8 +47,6 @@ const setStudents = asyncHandler(async(req, res) => {
 
 const updateStudents = asyncHandler(async(req, res) => {
     const studenta = await Student.findById(req.params.id)
-    console.log("school id: "+ studenta._id)
-    
     const student = await Student.findById(req.params.id)
     // console.log("student id: "+ student._id)
     if (!student){
@@ -81,6 +76,7 @@ const updateStudents = asyncHandler(async(req, res) => {
 // @ access Private
 const deleteStudents = asyncHandler(async(req, res) => {
     const student = await Student.findById(req.params.id)
+    const studentsSchool = await School.findById(student.schoolId)
 
     if (!student){
         res.status(400)
@@ -101,7 +97,11 @@ const deleteStudents = asyncHandler(async(req, res) => {
         res.status(401)
         throw new Error('user not authorized')
     }
+    // remove the student from his school
+    await School.findByIdAndUpdate(studentsSchool._id, {$pull: { students: student} })
+    // remove the student from students route
     await student.remove()
+
     res.status(200).json( {id: req.params.id})
 })
 module.exports = {
