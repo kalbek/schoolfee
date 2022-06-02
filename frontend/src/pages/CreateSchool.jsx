@@ -77,16 +77,6 @@ function CreateSchool() {
                 <button className="btn btn-block form-group">Add School</button>
             </form>
         </section>
-        
-        <section className="content">
-        {schools.length > 0 ? (
-          <div className="schools">
-            {schools.map((school) => (
-                <SchoolItem key={school._id} school={school}/>
-            ))}
-          </div>
-        ) : (<h3>No schools found</h3>)}
-      </section> 
       </>
   )
 }

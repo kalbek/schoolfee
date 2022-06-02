@@ -2,6 +2,16 @@ const asyncHandler = require('express-async-handler')
 const School = require('../models/schoolModel')
 const User = require('../models/userModel')
 
+
+// @desc Get schools
+// @route GET /api/schools
+// @ access Private
+const getSchool = asyncHandler(async (req, res) => {
+    // find school only by logged in user
+    const school = await School.findById(req.params.id)
+    res.status(200).json(school)     
+})
+
 // @desc Get schools
 // @route GET /api/schools
 // @ access Private
@@ -20,8 +30,10 @@ const setSchools = asyncHandler(async(req, res) => {
     //     throw new Error('Please add a text field')
     // }
     const school = await School.create({
-        text: req.body.text,
         user: req.user.id,
+        name: req.body.name,
+        address: req.body.address,
+        level: req.body.level,
     })
     res.status(200).json(school)
 })
@@ -87,4 +99,5 @@ module.exports = {
     setSchools,
     updateSchools,
     deleteSchools,
+    getSchool,
 }

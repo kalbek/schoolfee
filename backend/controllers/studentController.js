@@ -1,6 +1,6 @@
 const asyncHandler = require('express-async-handler')
 const Student = require('../models/studentModel')
-const School = require('../models/secondSchoolModel')
+const School = require('../models/schoolModel')
 const User = require('../models/userModel')
 
 // @desc Get students

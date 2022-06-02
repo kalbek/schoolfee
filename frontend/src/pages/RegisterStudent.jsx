@@ -18,15 +18,13 @@ function RegisterStudent() {
     })
 
     let [school, setSchool] = useState("")
-    let [schoolId, setSchoolId] = useState("")
     
     let handleSchoolSelection = (e) => {
       setSchool(e.target.value)
-      setSchoolId(e.target.value)
     }
      
     
-    const {Id, fname, grade, lname, section } = formData
+    const {fname, grade, lname, section } = formData
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -85,7 +83,6 @@ function RegisterStudent() {
             <h1>
                 <FaChild/> Register Student
             </h1>
-            {/* <p>Please Login</p> */}
         </section>
         <section className='form'>
             <form onSubmit={onSubmit}>
@@ -106,13 +103,12 @@ function RegisterStudent() {
                 </div>
                 <div className="form-group">
                     <input className="form-control" id="grade" name='grade' type='text' value={grade} placeholder='Student grade' onChange={onChange} />
-                </div>
+                </div>  
                 <div className="form-group">
                     <input className="form-control" id="section" name='section' type='text' value={section} placeholder='Enter student section' onChange={onChange} />
                 </div>
                 <button className="btn btn-block form-group">Register Student</button>
             </form>
-                {/* <button onClick={handleSchoolIdSetting} className="btn btn-block form-group">Get School Id</button> */}
         </section>
         <section className="content">
         {students.length > 0 ? (
