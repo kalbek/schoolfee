@@ -157,7 +157,31 @@ h3 {
   border: none;
   background: none;
 }
-
+.student .edit {
+  position: absolute;
+  top: 10px;
+  right: 75px;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+.student .created_at {
+  position: absolute;
+  top: 10px;
+  align-items: flex-start;
+  margin-right: 3px;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+.student .student-detail {
+  margin-top: 20px;
+  align-items: flex-start;
+  margin-left: -54px;
+}
+.student .text-det{
+  display: inline-block;
+}
 .form,
 .content {
   width: 70%;

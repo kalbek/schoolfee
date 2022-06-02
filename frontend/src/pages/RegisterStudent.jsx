@@ -115,7 +115,7 @@ function RegisterStudent() {
                 <button className="btn btn-block form-group">Register Student</button>
             </form>
         </section>
-        {/* <section className="content">
+        <section className="content">
         {students.length > 0 ? (
           <div className="students">
             {students.map((student) => (
@@ -123,7 +123,7 @@ function RegisterStudent() {
             ))}
           </div>
         ) : (<h3>No student found</h3>)}
-      </section>  */}
+      </section> 
     </>
   )
 }
