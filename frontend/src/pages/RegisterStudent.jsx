@@ -87,9 +87,14 @@ function RegisterStudent() {
         <section className='form'>
             <form onSubmit={onSubmit}>
             <div className="form-group">
-                {school}
-                <select  onChange={handleSchoolSelection}>
                   {school}
+                <select  onChange={handleSchoolSelection}>
+                  {console.log(school)}
+                  {schools.map((school) =>{
+                    <h4>
+                      {school}
+                    </h4>
+                  } )}
                 <option > Select a School </option>
                   {/* {schools.map((school) => <option key={school._id} value={school._id}>{school.name}</option>)} */}
                   {schools.map((school) => <option key={school._id} value={school._id}>{school.name}</option>)}
@@ -110,7 +115,7 @@ function RegisterStudent() {
                 <button className="btn btn-block form-group">Register Student</button>
             </form>
         </section>
-        <section className="content">
+        {/* <section className="content">
         {students.length > 0 ? (
           <div className="students">
             {students.map((student) => (
@@ -118,7 +123,7 @@ function RegisterStudent() {
             ))}
           </div>
         ) : (<h3>No student found</h3>)}
-      </section> 
+      </section>  */}
     </>
   )
 }

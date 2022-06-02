@@ -1,16 +1,23 @@
 import { useDispatch} from 'react-redux'
 import { deleteSchool} from '../features/schools/schoolSlice'
+import {FaEdit, FaTrash, FaCalendar} from 'react-icons/fa'
 function SchoolItem({school}) {
     const dispatch = useDispatch()
   return (
     <div className="school">
-    <div>
-        {new Date(school.createdAt).toLocaleDateString('en-US')}
-    </div>
-    <h2>School Name: {school.name}</h2>
-    <h2>School Address: {school.address}</h2>
-    <h2>School Level: {school.level}</h2>
-    <button onClick={() => dispatch(deleteSchool(school._id))} className="close">X</button>
+        <div className='created_at'>
+          <FaCalendar/>{new Date(school.createdAt).tolongda('en-US')}
+        </div>
+        <div className="school-detail">
+          <div className="text-det">
+
+        <h4> Name: {school.name}</h4>
+        <h4> Address: {school.address}</h4>
+        <h4> Level: {school.level}</h4>
+          </div>
+        </div>
+        <button className="close" onClick={() => dispatch(deleteSchool(school._id))}><FaTrash/>delete</button>
+        <button className="edit"><FaEdit/>edit</button>
 </div>
   )
 }

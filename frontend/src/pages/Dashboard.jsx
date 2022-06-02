@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import Spinner from '../components/Spinner'
+import {toast} from 'react-toastify'
 import { reset, getSchools } from '../features/schools/schoolSlice'
 import SchoolItem from '../components/SchoolItem'
 
@@ -13,13 +14,18 @@ function Dashboard() {
   const { schools, isLoading, isError, message} = useSelector((state) => state.schools)
   useEffect(() => {
     if (isError){
-      console.log(message)
+      if (!user) {
+        toast.error(`you need to login!`)
+      }
     }
     if (!user) {
       navigate('/login')
     }
-
+    if (user) {
+    // navigate('/login')
     dispatch(getSchools())
+  }
+  
 
     return () => {
       dispatch(reset())

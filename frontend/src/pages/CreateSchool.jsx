@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom'
 import {FaUser} from 'react-icons/fa'
 import { reset} from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
-import SchoolItem from '../components/SchoolItem'
+import {toast} from 'react-toastify'
 import {getSchools, createSchool} from '../features/schools/schoolSlice'
 
 function CreateSchool() {
@@ -20,10 +20,11 @@ function CreateSchool() {
     const dispatch = useDispatch()
 
     const { user } = useSelector((state) => state.auth)
-    const {schools, isLoading, isError, message} = useSelector((state) => state.schools)
+    const { isLoading, isError, message} = useSelector((state) => state.schools)
     useEffect(() => {
       if (isError){
-        console.log(message)
+        // console.log(message)
+        // toast.error(message)
       }
       if (!user) {
         navigate('/login')
